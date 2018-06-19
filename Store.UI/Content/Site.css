@@ -1,0 +1,378 @@
+﻿body {
+    padding-top: 50px;
+ color: #fff;
+    background-color: #333333;
+    padding-bottom: 100px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.container .jumbotron
+{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url(../Content/Images/fabric.jpg);
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius:0px;
+    /*background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;*/
+    
+    /*text-shadow: black 0.3em 0.3em 0.3em;*/
+}
+
+.overlay {
+   
+    /*background-image: linear-gradient(to bottom right,#fff,#fff);
+    opacity: .6;*/
+   
+    /*padding-top: 10px;
+    padding-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;*/
+}
+.bg {
+    /*background: url('../img/carouelbackground.jpg') no-repeat center center;*/
+    /*position: fixed;
+    width: 100%;
+    height: 350px;
+    top: 0;
+    left: 0;
+    z-index: -1;*/
+}
+
+.jumbotron .bg {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-size: cover;
+
+    padding: 40px;
+    /*margin: 10px;*/
+    
+}
+
+
+
+.product_view .modal-dialog {
+    max-width: 800px;
+    width: 100%;
+}
+
+.pre-cost {
+    text-decoration: line-through;
+    color: #a5a5a5;
+}
+.price{
+    color: #a5a5a5;
+}
+
+.space-ten {
+    padding: 10px 0;
+}
+.caption{
+    text-align: center;
+}
+
+.caption > p
+{
+    color: #999999;
+     height:40px;
+}
+.caption > h2{
+    text-align:center;
+    height:70px;
+}
+.caption > h4{
+    text-align:center;
+}
+
+.thumbnail {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-bottom: 15px;
+    /*max-height: 400px;*/
+}
+.thumbnail:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.img-thumbnail {
+    max-height: 200px;
+    min-height: 200px;
+    max-width: 200px
+}
+.img-thumbnail-small {
+    max-height: 70px;
+    min-height: 70px;
+    max-width: 70px
+}
+.ratings{
+    text-align: center;
+}
+#RemoveBtn{
+    font-size: 22px;
+    padding:5px;
+}
+#lineQty {
+    max-width:38px;
+    border: 1px solid #fff;
+    text-align: center;
+}
+.modal{
+    color: #333333;
+   
+}
+.total{
+    font-size: 20px;
+    font-weight:bold;
+
+}
+.detail-view {
+    color: #333333;
+}
+
+
+
+
+
+
+
+
+img {
+    max-width: 100%;
+}
+
+.preview {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type {
+            margin-right: 0;
+        }
+
+.tab-content {
+    overflow: hidden;
+}
+
+    .tab-content img {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title, .price, .sizes, .colors {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked, .price span {
+        color: #ff9f1a;
+    }
+
+.product-title, .rating, .product-description, .price, .vote, .sizes {
+    margin-bottom: 15px;
+}
+
+.product-title {
+    margin-top: 0;
+}
+
+.size {
+    margin-right: 10px;
+}
+
+    .size:first-of-type {
+        margin-left: 40px;
+    }
+
+.color {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type {
+        margin-left: 20px;
+    }
+
+.add-to-cart, .like, .theme-btn {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover, .like:hover, .theme-btn:hover {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange {
+    background: #ff9f1a;
+}
+
+.green {
+    background: #85ad00;
+}
+
+.blue {
+    background: #0076ad;
+}
+
+.tooltip-inner {
+    padding: 1.3em;
+}
+
+.highlight{
+   color: #ff9f1a;
+
+}
+
+
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
