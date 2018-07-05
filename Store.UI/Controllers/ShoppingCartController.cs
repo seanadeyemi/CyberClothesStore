@@ -99,7 +99,7 @@ namespace Store.UI.Controllers
 
         
 
-        public RedirectToRouteResult RemoveFromCart(ShoppingCart cart, int ClothId, string returnUrl)
+        public ActionResult RemoveFromCart(ShoppingCart cart, int ClothId, string returnUrl, bool IsPartial = false)
         {
             ICloth cloth = _uow.Clothes.Get(ClothId);
             if (cloth != null)
@@ -107,6 +107,12 @@ namespace Store.UI.Controllers
                 
                 cart.RemoveItem((Cloth)cloth);
             }
+            if (IsPartial)
+            {
+                return RedirectToAction("Index","Home");//new EmptyResult();
+            }
+
+
             return RedirectToAction("Index", new { returnUrl });
         }
 

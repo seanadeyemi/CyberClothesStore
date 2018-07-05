@@ -86,7 +86,7 @@ namespace Store.Logic
                       ImageThumbnailUrl = "adire1.jpg",
                       ImageUrl = "adire1.jpg",
                       InStock = 32,
-                      Category =  categoryRepository.Categories.ElementAt(0),
+                      Category =  categoryRepository.Categories.ElementAt(1),
                       IsFavorite = true
                 }
                 ,
@@ -100,7 +100,7 @@ namespace Store.Logic
                       ImageThumbnailUrl = "tiedye1.jpg",
                       ImageUrl = "tiedye1.jpg",
                       InStock = 7,
-                      Category =  categoryRepository.Categories.ElementAt(0),
+                      Category =  categoryRepository.Categories.ElementAt(1),
                       IsFavorite = true
                 }
                 ,

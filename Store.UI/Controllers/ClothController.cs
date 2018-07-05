@@ -32,5 +32,10 @@ namespace Store.UI.Controllers
             
             return PartialView("QuickView", cloth);
         }
+
+
+        
+
+     
     }
 }

@@ -19,7 +19,7 @@ namespace Store.UI.Controllers
         {
             ViewBag.SelectedCategory = category;
 
-            IEnumerable<ICategory> categories = _uow.Categories.GetAll().Distinct().OrderBy(x => x);
+            IEnumerable<ICategory> categories = _uow.Categories.Categories;//.GetAll().Distinct().OrderBy(x => x);
 
 
 

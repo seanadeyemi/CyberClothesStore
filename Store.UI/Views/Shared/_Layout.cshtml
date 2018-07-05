@@ -1,12 +1,14 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,10 +23,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="dropdown">
+                      
+                     @Html.Action("Menu", "Navigation")
+                    </li>
+                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                    <li>@Html.ActionLink("FAQ", "Faq", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+                <div class="navbar-right">
+
+                    @Html.ActionLink("Login","Login", "Account", null, new { @class = "navbar-text"})
+                </div>
+
                 <span id="summary_view">
                     @Html.Action("Summary", "ShoppingCart")
                 </span>
@@ -43,6 +54,11 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/ckeditor")
+    
+    <script src="~/Scripts/sweetalert.min.js"></script>
+
     @RenderSection("scripts", required: false)
     @RenderSection("script2", required: false)
 </body>

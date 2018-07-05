@@ -15,14 +15,30 @@ namespace Store.UI.Controllers
         public HomeController(IUnitOfWork uow)
         {
             _uow = uow;
+            
         }
         public ActionResult Index()
         {
             var latestClothes = _uow.Clothes.GetCheapestClothes;
-            var hvm = new HomeViewModel { FeaturedClothes = latestClothes };
+            var hvm = new HomeViewModel { DisplayedClothes = latestClothes };
 
             return View(hvm);
         }
+
+        public ActionResult ClothesByCategory(string name)
+        {
+            var _categoryClothes = _uow.Clothes.Find(c => c.Category.Name == name);
+
+          
+
+           var hvm = new HomeViewModel { DisplayedClothes =  _categoryClothes};
+
+            
+
+            return View("Index",hvm);
+        }
+
+       
 
         public ActionResult About()
         {
@@ -37,5 +53,9 @@ namespace Store.UI.Controllers
 
             return View();
         }
+
+      
+
+
     }
 }

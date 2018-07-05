@@ -1,15 +1,44 @@
 ﻿@model Store.Logic.ShoppingCart
 
-@{ 
+@{
     string returnUrl = Request.Url.PathAndQuery;
 }
 <ul class="nav navbar-nav navbar-right">
-    <li>
-        <a class="cart-link" href="/ShoppingCart?returnUrl=@returnUrl"><span>Cart <i class="glyphicon glyphicon-shopping-cart"></i></span> <span class="badge badge-success" > @Model.Items.Sum(x => x.Quantity)</span> <span class="badge">₦ @Model.CalculateTotalAmount().ToString("N")</span></a>
-   
-        
-        
+    <li class="dropdown">
+        @*<a class="cart-link dropdown-toggle" href="/ShoppingCart?returnUrl=@returnUrl"><span>Cart <i class="glyphicon glyphicon-shopping-cart"></i></span> <span class="badge badge-success"> @Model.Items.Sum(x => x.Quantity)</span> <span class="badge">₦ @Model.CalculateTotalAmount().ToString("N")</span></a>*@
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cart <i class="glyphicon glyphicon-shopping-cart"></i> <span class="badge badge-success"> @Model.Items.Sum(x => x.Quantity)</span> <span class="badge">₦ @Model.CalculateTotalAmount().ToString("N")</span><b class="caret"></b></a>
+        <ul class="dropdown-menu dropdown-cart">
+            @foreach (var item in Model.Items)
+            {
+                <li>
+                    <span class="item">
+                        <span class="item-left">
+                            <img src="@Url.Content("~/Content/Images/")@item.Cloth.ImageThumbnailUrl" class="img-thumbnail-small" style="max-height:30px; min-height:50px" alt="clothes/@item.Cloth.Name" />
+                            <span class="item-info">
+                                <a class="" href="@Url.Action("Details","Cloth", new { id = @item.ClothId } )">
+                                    <span>@item.Cloth.Name</span>
+                                    <span>@item.Quantity X <span class="highlight">@item.Price.ToString("C")</span></span>
+                                </a>
+                               
+                            </span>
+                        </span>
+
+                        <span class="item-right">
+                            @*<button class="btn btn-xs btn-danger pull-right">x</button>*@
+                        
+                            @Html.ActionLink("x", "RemoveFromCart", "ShoppingCart", new { ClothId = @item.ClothId, IsPartial = true}, new { @class = "label label-xs label-danger pull-right" })
+                        </span>
+                    </span>
+                    <hr />
+                </li>
+            }
+            <li><span class="pull-left">TOTAL: <span class="price highlight">@Model.CalculateTotalAmount().ToString("C")</span></span> <span class="pull-right">@Html.ActionLink("Checkout", "Checkout", "ShoppingCart", new {@class = "btn btn-warning btn-xs" })</span></li>
+            <li class="divider"></li>
+            <li><a class="text-center" href="/ShoppingCart?returnUrl=/Home/Index">View Cart</a></li>
+        </ul>
+
+
     </li>
 
-    
+
 </ul>

@@ -1,0 +1,61 @@
+﻿@model Store.UI.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/AccountLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          
+
+            <div class="login login-2">
+                <header class="login--header login-2--header text-center">
+                    <span class="icon icon-medium fa fa-user"></span>
+                    <h3>Register</h3>
+                    <span class="arrow-down login--header__arrow"></span>
+                </header>
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm", @class = "login--form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="login--form__input-area input-group">
+                        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="login--form__input-area input-group">
+                        <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="login--form__input-area input-group">
+                        <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+                       @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                  
+                    <label class="login--form__input-area checkbox-label">
+                        <input type="checkbox" />
+                        <span class="checkgraph fa fa-check"></span>
+                        Remember me?
+                    </label>
+                    <button type="submit" class="login--form__button btn btn-default" value="submit">sign up</button>
+                }
+                <footer class="login--footer text-center">
+                    <p class="login--footer__text">Already have an account? <strong>@Html.ActionLink("log in here", "Login")</strong></p>
+                </footer>
+            </div>
+
+
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+        </div>
+    </div>
+</div>

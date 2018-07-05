@@ -21,7 +21,7 @@
                         <span class="glyphicon glyphicon-star"></span>
                         (10 reviews)
                     </div>
-                    <p>@Model.LongDescription</p>
+                    <p>@Html.Raw(Model.LongDescription)</p>
                     <h3 class="cost"><span>₦</span>@Model.Price.ToString("N") <small class="pre-cost"><span>₦</span> 600.00</small></h3>
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-xs-12">

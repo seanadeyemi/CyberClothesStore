@@ -9,6 +9,6 @@ namespace Store.UI.Models
 {
     public class HomeViewModel
     {
-        public IEnumerable<ICloth> FeaturedClothes { get; set; }
+        public IEnumerable<ICloth> DisplayedClothes { get; set; }
     }
 }
