@@ -1,4 +1,4 @@
-﻿@model Store.Logic.Cloth
+﻿@model Store.Domain.Cloth
 
 @{
     ViewBag.Title = "Details";
@@ -38,7 +38,7 @@
                         </div>
                         <span class="review-no">41 reviews</span>
                     </div>
-                    <p class="product-description">@Model.LongDescription</p>
+                    <p class="product-description">@Html.Raw(Model.LongDescription)</p>
                     <h4 class="price">current price: <span>@Model.Price.ToString("C")</span></h4>
                     <p class="">We currently have @Model.InStock in stock.</p>
                     <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>

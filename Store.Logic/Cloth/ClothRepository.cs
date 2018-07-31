@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Store.Logic
 {
-    public class ClothRepository : Repository<ICloth>, IClothRepository
+    public class ClothRepository : Repository<Cloth>, IClothRepository
     {
       ///  private readonly ClothDbContext _DbContext;
         public ClothRepository(ClothDbContext context) : base(context)
@@ -16,19 +16,19 @@ namespace Store.Logic
           //  _DbContext = context;
         }
 
-        public IEnumerable<ICloth> Clothes
+        public IEnumerable<Cloth> Clothes
         {
             get { return GetAll(); }
         }
 
-        public IEnumerable<ICloth> FavoriteClothes
+        public IEnumerable<Cloth> FavoriteClothes
 
         {
             get { return this.Find(c => c.IsFavorite == true); }
 
 
         }
-        public IEnumerable<ICloth> GetCheapestClothes
+        public IEnumerable<Cloth> GetCheapestClothes
 
         {
             get { return this.Find(c => c.Price < 500).Take(6).OrderBy(c => c.Price); }

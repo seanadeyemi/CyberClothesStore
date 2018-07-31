@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+
+namespace Store.DomainN
+{
+    public interface IUserRepository<TUser> where TUser :IClothAppUser
+    {
+        List<TUser> UserList { get; }
+
+    }
+}

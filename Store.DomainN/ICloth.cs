@@ -22,8 +22,8 @@ namespace Store.Domain
 
         int InStock { get; set; }
 
-        int CategoryId { get; set; }
+        
 
-        ICategory Category { get; set; }
+        Category Category { get; set; }
     }
 }

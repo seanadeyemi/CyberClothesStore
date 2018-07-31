@@ -1,0 +1,55 @@
+﻿@model Store.UI.Models.UserListViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+    var sn = 1;
+}
+<h2>Users</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="fa fa-list"></span>  @Html.ActionLink(" Add User", "AddUser", null, new { @class = "btn btn-success btn-sm pull-right linker fa fa-user-plus" })
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped rbody">
+            <tr>
+                <th>S/N</th>
+                <th>Email</th>
+                <th>UserName</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+
+
+            @foreach (var user in Model.Users)
+            {
+            <tr>
+                <td>@sn</td>
+
+                <td style="width: 300px;">@user.Email</td>
+                <td style="width: 200px;">@user.UserName</td>
+                <td>@Html.ActionLink("Edit", "EditUser", "Account", new { userId = user.Id.ToString() }, new { @class = "linker" })</td>
+                @*<td>@Html.ActionLink("Edit","EditCategory", new {  category.Id })</td>*@
+                @*<td><a href="/Account/EditUser/@user.Id.ToString()" class="linker">Edit</a></td>*@
+                <td>
+                    @using (Html.BeginForm("DeleteUser", "Admin"))
+                    {
+                        @Html.Hidden("Id", user.Id)
+                        <input type="submit" class="btn btn-danger btn-xs" value="Delete" />
+                    }
+
+                </td>
+
+
+            </tr>
+
+
+                sn++;
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+
+    </div>
+
+</div>

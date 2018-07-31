@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Store.Domain;
+using Store.DomainN;
 using Store.Logic;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace ClassLibrary1
 {
-    public class User : IdentityUser
+    public class User : IdentityUser, IClothAppUser
     {
 
 

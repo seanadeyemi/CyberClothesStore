@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Store.DomainN;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,7 +14,10 @@ namespace Store.Domain
 
         IClothRepository Clothes { get; }
 
+        IUserRepository<IClothAppUser> Users { get; }
 
-        int Complete();
+
+
+        int Commit();
     }
 }

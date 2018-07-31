@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Store.Logic
 {
-    public class CategoryRepository : Repository<ICategory>, ICategoryRepository
+    public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         //private readonly ClothDbContext _DbContext;
         public CategoryRepository(ClothDbContext context) : base(context)
@@ -16,7 +16,7 @@ namespace Store.Logic
         }
 
 
-        public IEnumerable<ICategory> Categories
+        public IEnumerable<Category> Categories
         {
             get { return this.GetAll(); }
         }

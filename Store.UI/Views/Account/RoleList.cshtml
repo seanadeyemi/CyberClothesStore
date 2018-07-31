@@ -1,0 +1,55 @@
+﻿
+@model Store.UI.Models.RoleListViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+    var sn = 1;
+}
+
+<h2>Categories</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="fa fa-list"></span>  @Html.ActionLink("Add Role", "AddRole", null, new { @class = "btn btn-success btn-sm pull-right linker" })
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped rbody">
+            <tr>
+                <th>S/N</th>
+                <th>Name</th>
+              
+                <th></th>
+                <th></th>
+            </tr>
+
+
+
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td>@sn</td>
+
+                    <td style="width: 300px;">@role.Name</td>
+                   
+
+                  
+                    <td><a href="/Account/EditRole/@role.Id.ToString()" class="linker">Edit</a></td>
+                    <td>
+                        @using (Html.BeginForm("DeleteRole", "Account"))
+                        {
+                            @Html.Hidden("Id", role.Id)
+                            <input type="submit" class="btn btn-danger btn-xs" value="Delete" />
+                        }
+
+                    </td>
+                </tr>
+
+
+                sn++;
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+
+    </div>
+
+</div>

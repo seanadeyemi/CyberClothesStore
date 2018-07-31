@@ -53,13 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category\Category.cs" />
     <Compile Include="Category\CategoryRepository.cs" />
     <Compile Include="Category\MockCategoryRepository.cs" />
-    <Compile Include="Cloth\Cloth.cs" />
     <Compile Include="Cloth\ClothRepository.cs" />
     <Compile Include="Cloth\MockClothRepository.cs" />
-    <Compile Include="Common\AggregateRoot.cs" />
     <Compile Include="ClothDbContext.cs" />
     <Compile Include="Common\MockRepository.cs" />
     <Compile Include="Common\Repository.cs" />
@@ -69,12 +66,17 @@
     <Compile Include="Migrations\201806180511121_Initial.Designer.cs">
       <DependentUpon>201806180511121_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807071610526_editedClothModel.cs" />
+    <Compile Include="Migrations\201807071610526_editedClothModel.Designer.cs">
+      <DependentUpon>201807071610526_editedClothModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\MockOrderRepository.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Order\OrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCart\ShoppingCart.cs" />
+    <Compile Include="User\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -89,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806180511121_Initial.resx">
       <DependentUpon>201806180511121_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807071610526_editedClothModel.resx">
+      <DependentUpon>201807071610526_editedClothModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,60 +4,68 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
-<div class="overlay">
-    <div class="jumbotron"><div class="bg">
-    <h1>Chuks Clothes</h1>
-    <p class="lead">Exclusive Clothes specially Selected just for you!</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="container-fluid">
+    <div class="overlay">
+        <div class="jumbotron">
+            <div class="bg">
+                <h1 data-aos="fade-right" data-aos-duration="2600" data-aos-once="true">Chuks Clothes</h1>
+                <p class="lead">Exclusive Clothes specially Selected just for you!</p>
+                <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container">
-    <h2>Exclusive Offers</h2>
+    <h2>@Model.CurrentCategory</h2>
     <div class="row">
         @foreach (var item in Model.DisplayedClothes)
         {
             <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="@Url.Content("~/Content/Images/")@item.ImageThumbnailUrl" class="img-thumbnail" alt="clothes/@item.Name" />
-                    <div class="caption">
-                        <h2>@item.Name</h2>
-                       <h4><span class="price">@item.Price.ToString("C")</span></h4>
-                        <p>@item.ShortDescription</p>
-                        <a class="btn btn-default" href="@Url.Action("Details","Cloth", new { id = item.Id } )">Learn more &raquo;</a>
-                    </div>
-                    <div class="ratings">
-                        <p>
+                <div class="product-div">
+                    <div class="thumbnail">
+                        <img src="@Url.Content("~/Content/Images/")@item.ImageThumbnailUrl" class="img-thumbnail transition" alt="clothes/@item.Name" />
+                        <div class="caption">
+                            <h2>@item.Name</h2>
+                            <h4><span class="price">@item.Price.ToString("C")</span></h4>
+                            <p>@item.ShortDescription</p>
+                            <a class="btn btn-default" href="@Url.Action("Details","Cloth", new { id = item.Id } )">Learn more &raquo;</a>
+                        </div>
+                        <div class="ratings">
+                            <p>
 
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            (15 reviews)
-                        </p>
-                    </div>
-                    <div class="space-ten"></div>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                (15 reviews)
+                            </p>
+                        </div>
+                        <div class="space-ten"></div>
 
-                    <div class="btn-ground text-center">
-                        @*@using (Html.BeginForm("AddToCart", "ShoppingCart"))
-                        {*@
+                        <div class="btn-ground text-center">
+                            @*@using (Html.BeginForm("AddToCart", "ShoppingCart"))
+                {*@
                             <div class="">
                                 @*@Html.Hidden("ClothId", item.Id)
-                                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)*@  
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)*@
                                 <input type="hidden" value="@item.Id" name="ClothId" id="ClothId" />
                                 <input type="hidden" value="@Request.Url.PathAndQuery" name="returnUrl" id="returnUrl" />
 
                                 <button type="button" class="btn btn-primary quickview" data-toggle="modal" id="@item.Id" data-target="#product_view"><i class="fa fa-search"></i> Quick View</button>
-                                <button type="button" class="btn btn-primary addToCart" id="@item.Id" ><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                                <button type="button" class="btn btn-primary addToCart" id="@item.Id"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
                                 @*<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add To Cart</button>*@
                             </div>
-                        @*}*@
-                      
+                            @*}*@
+
                         </div>
-                    <div class="space-ten"></div>
+                        <div class="space-ten"></div>
+                    </div>
+                    <div class="text-view transition">
+                        <h4>View Details</h4>
+                    </div>
                 </div>
+              
             </div>
 
         }
@@ -66,19 +74,22 @@
     </div>
 </div>
 <div class="modal fade product_view" id="product_view">
- 
+
 </div>
 @section script2{
-    
+<script src="/Scripts/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <script type="text/javascript">
         $(document).ready(
             function () {
 
 
 
-                
+
                 $('#product_view').on('show.bs.modal', function (e) {
-                   
+
                     var id = e.relatedTarget.id;
                     var $modal = $(this);
 
@@ -104,7 +115,7 @@
                             ClothId: id
                         },
                         success: function (data) {
-                           
+
                             $('#summary_view').html(data);
                         }
                     });
@@ -115,5 +126,5 @@
 
     </script>
 
-    
-    }
+
+}

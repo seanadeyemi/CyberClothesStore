@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rotativa;
 
 namespace Store.UI.Controllers
 {
@@ -23,13 +24,13 @@ namespace Store.UI.Controllers
         {
             var civm = new CartIndexViewModel
             {
-                Cart = cartService,  
+                Cart = cartService,
                 ReturnUrl = returnUrl
             };
             return View(civm);
         }
 
-       
+
 
 
         public PartialViewResult Summary(ShoppingCart cart)
@@ -41,6 +42,31 @@ namespace Store.UI.Controllers
         {
             return View(new ShippingDetails());
         }
+
+
+        public ActionResult PrintPdf(ShoppingCart cart)
+        {
+            //var pdfView = new ActionAsPdf("Index", new { cartService = cart,  returnUrl = ""});
+            var civm = new CartIndexViewModel
+            {
+                Cart = cart,
+                ReturnUrl = ""
+            };
+
+
+            //var pdfView = new ViewAsPdf("Index", civm);
+
+            var pdfView = new ViewAsPdf("Index", civm)
+            {
+                FileName = "File.pdf",
+                PageSize = Rotativa.Options.Size.A4,
+                PageMargins = { Left = 0, Right = 0 }
+            };
+
+
+            return pdfView;
+        }
+
 
         //public PartialViewResult LineSubTotal(ShoppingCart cart, int lineId, int Quantity)
         //{
@@ -83,10 +109,10 @@ namespace Store.UI.Controllers
             ICloth cloth = _uow.Clothes.Get(ClothId);
             if (cloth != null)
             {
-               
+
                 cart.AddItem((Cloth)cloth, 1);
             }
-            if(IsPartial)
+            if (IsPartial)
             {
                 return RedirectToAction("Summary");
             }
@@ -94,22 +120,22 @@ namespace Store.UI.Controllers
             {
                 return RedirectToAction("Index", new { returnUrl });
             }
-           
+
         }
 
-        
+
 
         public ActionResult RemoveFromCart(ShoppingCart cart, int ClothId, string returnUrl, bool IsPartial = false)
         {
             ICloth cloth = _uow.Clothes.Get(ClothId);
             if (cloth != null)
             {
-                
+
                 cart.RemoveItem((Cloth)cloth);
             }
             if (IsPartial)
             {
-                return RedirectToAction("Index","Home");//new EmptyResult();
+                return RedirectToAction("Index", "Home");//new EmptyResult();
             }
 
 
@@ -126,7 +152,7 @@ namespace Store.UI.Controllers
         //        cart = new ClothShoppingCartService(sc);
         //        Session["Cart"] = cart;
         //    }
-           
+
         //    return cart;
         //}
 

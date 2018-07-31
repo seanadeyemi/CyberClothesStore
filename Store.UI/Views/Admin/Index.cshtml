@@ -1,58 +1,8 @@
-﻿@model Store.UI.Models.ClothViewModel
+﻿@model Store.UI.Models.ClothListViewModel
 @{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
     ViewBag.Title = "Index";
-    var sn = 1;
+
 }
 
 <h2>Index</h2>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Áll Clothes
-    </div>
-    <div class="panel-body">
-        <table class="table table-striped">
-            <tr>
-                <th>S/N</th>
-                <th></th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>In stock</th>
-                <th></th>
-                <th></th>
-            </tr>
-            
-            
-
-            @foreach (var cloth in Model.Clothes)
-            {
-                <tr>
-                    <td>@sn</td>
-                    <td>
-                        <img src="@Url.Content("~/Content/Images/")@cloth.ImageThumbnailUrl" class="img-thumbnail-small img-circle" style="width:55px; height:55px;" alt="clothes/@cloth.Name" />
-                    </td>
-                    <td style="width: 300px;">@cloth.Name</td>
-                    <td style="width: 200px;">@cloth.Price.ToString("C")</td>
-                    <td>@cloth.InStock</td>
-                    <td>@Html.ActionLink("Edit","Edit", new {  @cloth.Id })</td>
-
-                    <td>
-                            @using (Html.BeginForm("Delete", "Admin"))
-                            {
-                                @Html.Hidden("Id", cloth.Id)
-                                <input type="submit" class="btn btn-danger btn-xs" value="Delete"/>
-                            }
-
-                    </td>
-                </tr>
-
-
-                                    sn++;
-                            }
-        </table>
-    </div>
-    <div class="panel-footer">
-
-    </div>
-
-</div>

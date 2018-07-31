@@ -18,7 +18,7 @@ body {
     font-family: 'montserrat', sans-serif;
 }
 
-/* Set padding to keep content from hitting the edges */
+/* Set padding to keep content from hitting the edges */2
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -31,8 +31,14 @@ body {
     white-space: normal;
 }
 
-h1, h2{
-font-family: 'montserratbold', sans-serif;
+h1, h2, h3, h4 {
+    font-family: 'montserratbold', sans-serif;
+    /*background-color: #565656;
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;*/
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -95,6 +101,10 @@ table {
     color: black;
 }
 
+.modal-header{
+    background-color:#222222;
+    color:#fff;
+}
 
 .product_view .modal-dialog {
     max-width: 800px;
@@ -128,6 +138,37 @@ table {
 .caption > h4{
     text-align:center;
 }
+.product-div, .product-div2 {
+    position: relative;
+    overflow: hidden;
+}
+
+    .product-div:hover img {
+        transform: scale(1.1);
+    }
+
+
+
+img {
+    transform: scale(1);
+}
+.product-div2:hover img {
+    opacity: .8;
+}
+.product-div2:hover .text-view {
+    top: 50%;
+    opacity: 1;
+}
+.text-view {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
 
 .thumbnail {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -144,8 +185,7 @@ table {
     max-width: 200px
 }
 .img-thumbnail-small {
-    max-height: 70px;
-    min-height: 70px;
+
     max-width: 70px
 }
 .ratings{
@@ -164,17 +204,19 @@ table {
     color: #333333;
    
 }
-.total{
+.total {
     font-size: 20px;
-    font-weight:bold;
-
+    font-weight: bold;
+    font-family: 'montserratbold', sans-serif;
 }
 .detail-view {
     color: #333333;
 }
 
 
-
+.pagerli{
+    color: #333333;
+}
 
 
 
@@ -574,13 +616,13 @@ ul.dropdown-cart {
     transform: translateX(-50%);
 }
 
-.form-control {
+.form-control, select {
     height: auto;
     padding: .7em;
     background-color: #ccc;
 }
 
-input.form-control, span.input-group-addon {
+input.form-control, span.input-group-addon , select{
     border-radius: 0;
     border: none;
 }
@@ -607,6 +649,10 @@ span.icon-medium {
     line-height: 1.9em;
     width: 2em;
     text-align: center;
+    border: 1px solid #aeaeae;
+    border-radius: 100%;
+
+  
 }
 
 .login--header .icon {
@@ -638,6 +684,10 @@ span.icon {
 
 .icon-gp {
     background-color: #c22a00;
+}
+.navbar-brand {
+    margin-right: 18px;
+    padding-right: 50px;
 }
 
 a {
@@ -684,6 +734,20 @@ input:checked ~ .checkgraph:before {
     -webkit-animation-duration: .3s;
     animation-duration: .3s;
 }
+
+.transition {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+}
+
+.jumbotron h1 {
+    text-shadow: 0px 0px 3px #000;
+    letter-spacing: 1px;
+}
+
 
 @-webkit-keyframes check {
     0% {

@@ -1,19 +1,22 @@
-﻿using Store.Domain;
+﻿using ClassLibrary1;
+using Store.Domain;
+using Store.DomainN;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Store.Logic.Common
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
-     //   private readonly ClothDbContext context;
+        private readonly ClothDbContext context;
         public UnitOfWork()
         {
-            //context = new ClothDbContext();
-            Clothes = new MockClothRepository();// new ClothRepository(context);
-            Orders = new MockOrderRepository();//new OrderRepository(context);
-            Categories = new MockCategoryRepository();//new CategoryRepository(context);
+            context = new ClothDbContext();
+            Clothes = new ClothRepository(context);// new MockClothRepository();
+            Orders = new OrderRepository(context);// new MockOrderRepository();
+            Categories = new CategoryRepository(context);//new MockCategoryRepository();
+            Users = new UserRepository(context);
         }
 
 
@@ -23,15 +26,19 @@ namespace Store.Logic.Common
 
         public IClothRepository Clothes { get; private set; }
 
-        public int Complete()
+       
+
+        public IUserRepository<IClothAppUser> Users { get; private set; }
+
+        public int Commit()
         {
-            return 0;// context.SaveChanges();
+          return context.SaveChanges();//   0;
         }
 
         public void Dispose()
         {
            
-           // context.Dispose();
+            context.Dispose();
         }
     }
 }

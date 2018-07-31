@@ -8,10 +8,10 @@
     @Styles.Render("~/Content/css")
 
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/aos.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top data-aos=" fade-down" data-aos-duration="2600" data-aos-once="true" ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -24,8 +24,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                      
-                     @Html.Action("Menu", "Navigation")
+
+                        @Html.Action("Menu", "Navigation")
                     </li>
                     <li>@Html.ActionLink("About Us", "About", "Home")</li>
                     <li>@Html.ActionLink("FAQ", "Faq", "Home")</li>
@@ -33,13 +33,13 @@
                 </ul>
                 <div class="navbar-right">
 
-                    @Html.ActionLink("Login","Login", "Account", null, new { @class = "navbar-text"})
+                    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "navbar-text" })
                 </div>
 
                 <span id="summary_view">
                     @Html.Action("Summary", "ShoppingCart")
                 </span>
-              
+
             </div>
 
         </div>
@@ -56,8 +56,10 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/site")
     @Scripts.Render("~/bundles/ckeditor")
-    
+
+    <script src="/Scripts/aos.js"></script>
     <script src="~/Scripts/sweetalert.min.js"></script>
+
 
     @RenderSection("scripts", required: false)
     @RenderSection("script2", required: false)

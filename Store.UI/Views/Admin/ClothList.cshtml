@@ -1,0 +1,70 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model Store.UI.Models.ClothListViewModel
+@{
+    Layout = null;//"~/Views/Shared/AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+    var c = ViewBag.Page ?? 1;
+    var j = c - 1;
+    var p = ViewBag.PageSize ?? Model.Clothes.Count();
+    var m = j * p;
+    var sn = m+1;
+}
+
+<h2>Clothes</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Áll Clothes  @Html.ActionLink("Add Cloth", "AddCloth", null, new { @class = "btn btn-success btn-sm pull-right linker" })
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped rbody">
+            <tr>
+                <th>S/N</th>
+                <th></th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>In stock</th>
+                <th></th>
+                <th></th>
+            </tr>
+            
+            
+
+            @foreach (var cloth in Model.Clothes)
+            {
+                <tr>
+                    <td>@sn</td>
+                    <td>
+                        <img src="@Url.Content("~/Content/Images/")@cloth.ImageThumbnailUrl" class="img-thumbnail-small img-circle" style="width:65px; height:65px;" alt="clothes/@cloth.Name" />
+                    </td>
+                    <td style="width: 300px;">@cloth.Name</td>
+                    <td style="width: 200px;">@cloth.Price.ToString("C")</td>
+                    <td>@cloth.InStock</td>
+                    @*<td>@Html.ActionLink("Edit","EditCloth", new {  @cloth.Id })</td>*@
+                    <td><a href="/Admin/EditCloth/@cloth.Id" class="linker">Edit</a></td>
+                    <td>
+                            @using (Html.BeginForm("DeleteCloth", "Admin"))
+                            {
+                                @Html.Hidden("Id", cloth.Id)
+                                <input type="submit" class="btn btn-danger btn-xs" value="Delete"/>
+                            }
+
+                    </td>
+                </tr>
+
+
+                                    sn++;
+                            }
+        </table>
+
+      
+    </div>
+    <div class="panel-footer">
+        <div id="contentPager">
+@Html.PagedListPager(Model.Clothes, page => Url.Action("ClothList", new { page }), new PagedListRenderOptions { LiElementClasses = new List<string> {"pagerli"}, DisplayPageCountAndCurrentLocation = true, DisplayItemSliceAndTotal = true })
+        </div>
+        
+    </div>
+
+</div>

@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Store.Domain
 {
-    public interface IClothRepository : IRepository<ICloth>
+    public interface IClothRepository : IRepository<Cloth>
     {
-        IEnumerable<ICloth> FavoriteClothes { get; }
+        IEnumerable<Cloth> FavoriteClothes { get; }
 
-         IEnumerable<ICloth> GetCheapestClothes{ get; }
+         IEnumerable<Cloth> GetCheapestClothes{ get; }
     }
 }

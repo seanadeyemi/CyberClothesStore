@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Store.Logic
 {
-    public class MockCategoryRepository : MockRepository<ICategory>, ICategoryRepository
+    public class MockCategoryRepository : MockRepository<Category>, ICategoryRepository
     {
-        public IEnumerable<ICategory> Categories { get
+        public MockCategoryRepository()
+        {
+            _collection = Categories;
+        }
+
+
+        public IEnumerable<Category> Categories { get
             { return new List<Category>
         {
             new Category

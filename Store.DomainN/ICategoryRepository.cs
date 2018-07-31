@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Store.Domain
 {
-    public interface ICategoryRepository : IRepository<ICategory>
+    public interface ICategoryRepository : IRepository<Category>
     {
-        IEnumerable<ICategory> Categories{ get; }
+        //IEnumerable<Category> Categories{ get; }
     }
 }

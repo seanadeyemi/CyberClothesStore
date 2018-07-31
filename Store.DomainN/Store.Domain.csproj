@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateRoot.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Cloth.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="ICategory.cs" />
     <Compile Include="ICategoryRepository.cs" />
@@ -51,6 +54,8 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IShoppingCart.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IUser.cs" />
+    <Compile Include="IUserRepository.cs" />
     <Compile Include="OrderDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShippingDetails.cs" />

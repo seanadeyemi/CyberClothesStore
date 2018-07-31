@@ -20,7 +20,7 @@ namespace Store.UI.Controllers
         public ActionResult Index()
         {
             var latestClothes = _uow.Clothes.GetCheapestClothes;
-            var hvm = new HomeViewModel { DisplayedClothes = latestClothes };
+            var hvm = new HomeViewModel { DisplayedClothes = latestClothes, CurrentCategory = "Exclusive Offers" };
 
             return View(hvm);
         }
@@ -31,10 +31,10 @@ namespace Store.UI.Controllers
 
           
 
-           var hvm = new HomeViewModel { DisplayedClothes =  _categoryClothes};
+           var hvm = new HomeViewModel { DisplayedClothes =  _categoryClothes, CurrentCategory = name};
 
-            
 
+          
             return View("Index",hvm);
         }
 

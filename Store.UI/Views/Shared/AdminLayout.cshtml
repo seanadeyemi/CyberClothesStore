@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/ckeditor")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,35 +22,227 @@
             </div>
             <div class="navbar-collapse collapse">
                 @*<ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Site", "List", "Product")</li>
+                        <li>@Html.ActionLink("Site", "List", "Product")</li>
 
-                </ul>*@
+                    </ul>*@
                 @Html.Partial("_LoginPartial")
             </div>
 
         </div>
     </div>
     <div class="container body-content">
-        @if (TempData["message"] != null)
-        {
-            <div id="error" class="alert alert-success alert-dismissable"><strong>@TempData["message"]</strong>
-                <a id="close" class="close">
-                &times;
-                </a>
+        <div id="main-wrapper" class="row transition2">
+            <div class="col-md-2 col-sm-4 sidebar transition2">
+                <div>
+                    <span class="coll fa fa-chevron-left pull-right" id="menu-toggle"></span>
+                </div>
+                <div class="logo text-center">
+                    @*<img src="http://lorempixel.com/output/people-q-g-64-64-1.jpg" class="img-responsive center-block" alt="Logo">*@
+                    <span class="icon icon-medium fa fa-user"></span>
+                </div>
+                <br />
+                <div class="left-navigation">
+                    <div class="admin-title">Manage</div>
+                    <ul class="list">
+                        <li>
+                            <a href="/Admin/Index"><div><i class="fa fa-home"></i>Home</div></a>
+                        </li>
+                        <li>
+                            <div class="dropdown transition">
+                                <i class="fa fa-list" aria-hidden="true"></i>Categories<i class="fa fa-plus pull-right expand"></i>
+                            </div>
+                            <div class="menu-wrapper">
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="/Admin/CategoryList">
+                                            <div>
+                                                <i class="fa fa-list-ul"></i>
+                                                List
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/AddCategory">
+                                            <div>
+                                                <i class="fa fa-circle-thin"></i>
+                                                Add
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </li>
+                        <li>
+                            <div class="dropdown transition2">
+                                <i class="fa fa-user" aria-hidden="true"></i>Clothes<i class="fa fa-plus pull-right expand"></i>
+                            </div>
+                            <div class="menu-wrapper">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/Admin/ClothList">
+                                        <div>
+                                            <i class="fa fa-list-ul"></i>
+                                            List
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/AddCloth">
+                                        <div>
+                                            <i class="fa fa-plus-circle"></i>
+                                            Add
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown transition2">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>Orders<i class="fa fa-plus pull-right expand"></i>
+                            </div>
+                            <div class="menu-wrapper">
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="/Admin/Index">
+                                            <div>
+                                                <i class="fa fa-list-ul"></i>
+                                                List
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Index">
+                                            <div>
+                                                <i class="fa fa-plus-circle"></i>
+                                                Add
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </li>
+                        <li class="list-divider"></li>
+                    </ul>
+
+                    <br />
+               
+                    <div class="admin-title">Settings</div>
+                    <ul class="list">
+
+                        <li>
+                            <div class="dropdown transition2">
+                                <i class="fa fa-users" aria-hidden="true"></i>Users<i class="fa fa-plus pull-right expand"></i>
+                            </div>
+                            <div class="menu-wrapper">
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="/Admin/UserList">
+                                            <div>
+                                                <i class="fa fa-list-ul"></i>
+                                                List
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Account/AddUser">
+                                            <div>
+                                                <i class="fa fa-plus-circle"></i>
+                                                Add
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="dropdown transition2">
+                                <i class="fa fa-bullhorn" aria-hidden="true"></i>Roles<i class="fa fa-plus pull-right expand"></i>
+                            </div>
+                            <div class="menu-wrapper">
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="/Account/RoleList">
+                                            <div>
+                                                <i class="fa fa-list-ul"></i>
+                                                List
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Account/AddRole">
+                                            <div>
+                                                <i class="fa fa-plus-circle"></i>
+                                                Add
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="dropdown transition2">
+                                <i class="fa fa-bullhorn" aria-hidden="true"></i>Ads<i class="fa fa-plus pull-right expand"></i>
+                            </div>
+                            <div class="menu-wrapper">
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="/Admin/Index">
+                                            <div>
+                                                <i class="fa fa-list-ul"></i>
+                                                List
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Index">
+                                            <div>
+                                                <i class="fa fa-plus-circle"></i>
+                                                Add
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li>
+
+                    </ul>
+                </div>
+
             </div>
-        }
+            <div id="right-pane" class="col-md-10 col-sm-8 col-md-offset-2 transition2">
+                @if (TempData["message"] != null)
+                {
+                    <div id="error" class="alert alert-success alert-dismissable">
+                        <strong>@TempData["message"]</strong>
+                        <a id="close" class="close">
+                            &times;
+                        </a>
+                    </div>
+                }
+                <div id="renderbody">
+                    @RenderBody()
+                </div>
+
+            
+                <hr /><p>&copy; @DateTime.Now.Year - ChuksClothing.com</p>
+            </div>
+        </div>
 
 
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - ChuksClothing.com</p>
-        </footer>
+
+        <footer></footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/ckeditor")
+    
     @Scripts.Render("~/bundles/site")
 
     @RenderSection("scripts", required: false)
