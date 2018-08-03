@@ -1,4 +1,5 @@
 ﻿using ClassLibrary1;
+using Facebook;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -159,6 +160,14 @@ namespace Store.UI.Controllers
                 //     "Please confirm your account by clicking <a href=\""  + callbackUrl + "\">here</a>");
 
                 var identity = await userManager.CreateIdentityAsync(user, "ApplicationCookie");
+                //Request.GetOwinContext().Authentication.GetExternalLoginInfo()
+                //Request.GetOwinContext().Authentication.
+
+                //new UserLoginInfo();
+               // userManager.FindAsync(new UserLoginInfo(loginProvider:, providerKey:));
+
+
+
                 //identity.AddClaim
 
                 //  Comment the following line to prevent log in until the user is confirmed.
@@ -178,7 +187,7 @@ namespace Store.UI.Controllers
                 //return View("Info");
 
 
-                //return RedirectToAction("Index",  "Admin");
+                return RedirectToAction("Index",  "Admin");
             }
 
             if (result.Errors.Any())
@@ -194,7 +203,136 @@ namespace Store.UI.Controllers
             return View(model);
 
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLogin(string provider)
+        {
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = "Admin/Index" }));
+        }
 
+        [AllowAnonymous]
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        {
+            var loginInfo = Request.GetOwinContext().Authentication.GetExternalLoginInfo();
+            ExternalRegisterViewModel exrvm = new ExternalRegisterViewModel();
+
+            if(loginInfo == null)
+            {
+                return RedirectToAction("Login");
+            }
+            UserLoginInfo lg = loginInfo == null ? null : new UserLoginInfo(loginInfo.Login.LoginProvider, loginInfo.Login.ProviderKey);
+            if(lg != null)
+            {
+                var user = await userManager.FindAsync(lg);
+               
+
+
+                if(user == null)
+                {
+                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                    if(loginInfo.Login.LoginProvider == "Google")
+                    {
+                        var Email = loginInfo.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+                        var FirstName = loginInfo.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname").Value;
+                        var LastName = loginInfo.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname").Value;
+                        exrvm.UserName = Email;
+                       
+                        exrvm.FirstName = FirstName;
+                        exrvm.LastName = LastName;
+                        exrvm.Picture = string.Empty;
+                    }
+                    else if (loginInfo.Login.LoginProvider == "Facebook")
+                    {
+                        var identity = Request.GetOwinContext().Authentication.GetExternalIdentity(DefaultAuthenticationTypes.ExternalCookie);
+                        var AccessToken = identity.FindFirstValue("FacebookAccessToken");
+                        var FbClient = new FacebookClient(AccessToken);
+                        dynamic Email = FbClient.Get("/me?fields=email");
+                        dynamic FirstName = FbClient.Get("/me?fields=first_name");
+                        dynamic LastName = FbClient.Get("/me?fields=last_name");
+                        dynamic Picture = FbClient.Get("/me?fields=picture");
+
+                        string picture = Picture.picture.data.url;
+                        string firstname = FirstName.first_name;
+                        string lastname = LastName.last_name;
+                        exrvm.UserName = Email.email;
+                        exrvm.FirstName = firstname;
+                        exrvm.LastName = lastname;
+                        exrvm.Picture = picture;
+
+
+
+                    }
+
+
+
+
+
+                }
+                else
+                {
+                    var identity = await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ExternalCookie);
+                    Request.GetOwinContext().Authentication.SignIn(identity);
+                }
+
+
+            }
+            //RedirectToAction("Index","Admin");
+            return View("ExternalRegister", exrvm);
+        }
+
+
+        [HttpPost]
+        
+        public async Task<ActionResult> ExternalLoginRegister(ExternalRegisterViewModel evm)
+        {
+
+            var loginInfo = Request.GetOwinContext().Authentication.GetExternalLoginInfo();
+
+
+            if (ModelState.IsValid)
+            {
+                if(loginInfo == null)
+                {
+                    return View("ExternalLoginFailure");
+                }
+                var user = new User
+                {
+                    Email = evm.UserName,
+                    UserName = evm.UserName
+                };
+
+                string role = "User";
+                var result = await userManager.CreateAsync(user);
+
+                if(result.Succeeded)
+                {
+                    result = await userManager.AddLoginAsync(user.Id, loginInfo.Login);
+                    if(result.Succeeded)
+                    {
+                        var identity = await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ExternalCookie);
+
+                        Request.GetOwinContext().Authentication.SignIn(identity);
+
+                        return RedirectToAction("Index", "Admin");
+                    }
+                }
+                if (result.Errors.Any())
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
+
+                }
+
+
+            }
+
+
+
+            return View("ExternalRegister", evm);
+        }
 
         [HttpGet]
         public ActionResult ConfirmEmail()
@@ -405,6 +543,41 @@ namespace Store.UI.Controllers
         {
 
             return View(new UserViewModel());
+        }
+
+
+        internal class ChallengeResult : HttpUnauthorizedResult
+        {
+
+            public string LoginProvider { get; set; }
+            public string RedirectUri { get; set; }
+            public string UserId { get; set; }
+
+
+
+            public ChallengeResult(string provider, string redirectUri):this(provider,redirectUri,  null)
+            {
+
+            }
+            public ChallengeResult(string provider, string redirectUri, string userId)
+            {
+                LoginProvider = provider;
+                UserId = userId;
+                RedirectUri = redirectUri;
+            }
+
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                var properties = new AuthenticationProperties { RedirectUri = RedirectUri  };
+                if(UserId != null)
+                {
+                    properties.Dictionary["XsrfId"] = UserId;
+                }
+
+                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+
+            }
         }
     }
 }

@@ -47,11 +47,7 @@
 
     <footer class="login--footer text-center">
         <p class="login--footer__text">Or you can login with one of the following</p>
-        <div class="login--footer__social-buttons">
-            <a href="#"><span class="icon icon-small icon-fb fa fa-facebook"></span></a>
-            <a href="#"><span class="icon icon-small icon-tw fa fa-twitter"></span></a>
-            <a href="#"><span class="icon icon-small icon-gp fa fa-google-plus"></span></a>
-        </div>
+            @Html.Partial("_ExternalloginPartial")
         <p class="login--footer__text">dont have an account? <strong>@Html.ActionLink("sign up", "Register") </strong></p>
     </footer>
 </div>

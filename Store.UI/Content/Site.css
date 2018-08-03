@@ -676,14 +676,23 @@ span.icon {
 
 .icon-fb {
     background-color: #0069e0;
+    color: #fff;
+    border: 1px solid #e4e5e7;
+    padding:5px;
 }
 
 .icon-tw {
     background-color: #8accff;
+    color: #fff;
+    border: 1px solid #e4e5e7;
+    padding: 5px;
 }
 
 .icon-gp {
     background-color: #c22a00;
+    color: #fff;
+    border: 1px solid #e4e5e7;
+    padding: 5px;
 }
 .navbar-brand {
     margin-right: 18px;

@@ -8,6 +8,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 using Owin;
 using ClassLibrary1;
+using Microsoft.Owin.Security.Google;
+using Microsoft.Owin.Security.Facebook;
 
 [assembly: OwinStartup(typeof(Store.UI.Startup))]
 
@@ -31,12 +33,63 @@ namespace Store.UI
 
             });
 
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
             //app.CreatePerOwinContext<CustomUserManager>(CustomUserManager.Create);
             //app.CreatePerOwinContext<CustomSignInManager>(CustomSignInManager.Create);
 
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "120852303083 - ma5e842k7ss18jd0aea3ilroltdq5heh.apps.googleusercontent.com",
+            //    ClientSecret = "WkiiXsQipBYXc7A0zSa4OCG7"
+            //});
+
+            var facebookAuthenticationOptions = new FacebookAuthenticationOptions();
+            facebookAuthenticationOptions.Scope.Add("public_profile");
+            facebookAuthenticationOptions.Scope.Add("email");
+            facebookAuthenticationOptions.AppId = "219310835433760";
+            facebookAuthenticationOptions.AppSecret = "8bed1526ef97cf57d9eceb9bea702a69";
+            facebookAuthenticationOptions.Provider = new FacebookAuthenticationProvider()
+            {
+                OnAuthenticated = context =>
+                {
+                    context.Identity.AddClaim(new System.Security.Claims.Claim("FaceBookAccessToken",
+                        context.AccessToken));
+                    return Task.FromResult(true);
+                }
+            };
+
+            facebookAuthenticationOptions.SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie;
+            app.UseFacebookAuthentication(facebookAuthenticationOptions);
 
 
-            UserManagerFactory =() =>
+
+            var googleAuthenticationOptions = new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "120852303083-ma5e842k7ss18jd0aea3ilroltdq5heh.apps.googleusercontent.com",
+                ClientSecret = "WkiiXsQipBYXc7A0zSa4OCG7",
+                Provider = new GoogleOAuth2AuthenticationProvider()
+                {
+                    OnAuthenticated = async context =>
+                    {
+                        context.Identity.AddClaim(new System.Security.Claims.Claim("GoogleAccessToken", context.AccessToken));
+                        foreach (var claim in context.User)
+                        {
+                            var claimType = string.Format("urn:google:{0}", claim.Key);
+                            string ClaimValue = claim.Value.ToString();
+                            if (!context.Identity.HasClaim(claimType, ClaimValue))
+                                context.Identity.AddClaim(new System.Security.Claims.Claim(claimType, ClaimValue, "XmlSchemaString", "Google"));
+                        }
+                    }
+                }
+            };
+            googleAuthenticationOptions.Scope.Add("https://www.googleapis.com/auth/plus.login email");
+            app.UseGoogleAuthentication(googleAuthenticationOptions);
+
+
+
+
+            UserManagerFactory = () =>
                 {
                     var usermanager = new UserManager<User>(new UserStore<User>(new ClothDbContext()));
 

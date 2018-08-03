@@ -1,0 +1,64 @@
+﻿@model Store.UI.Models.ExternalRegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/AccountLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          
+
+            <div class="login login-2">
+                <header class="login--header login-2--header text-center">
+                    <span class="icon icon-medium fa fa-user"></span>
+                    <h3>You have successfully Authenticated with @ViewBag.LoginProvider</h3>
+                    <p>Please confirm your information below</p>
+                    <span class="arrow-down login--header__arrow"></span>
+                </header>
+                @using (Html.BeginForm("ExternalLoginRegister", "Account", FormMethod.Post, new { id = "registerForm", @class = "login--form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="login--form__input-area input-group">
+                        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="login--form__input-area input-group">
+                        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="login--form__input-area input-group">
+                        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="text-center">
+                        @if (Model.Picture != string.Empty)
+                        {
+                            <img src="@Model.Picture" class="img-circle" style="width:120px; height:120px;" />
+
+                        }
+                    </div>
+
+                    <button type="submit" class="login--form__button btn btn-default" value="submit">Continue</button>
+                }
+                <footer class="login--footer text-center">
+                    <p class="login--footer__text">Already have an account? <strong>@Html.ActionLink("log in here", "Login")</strong></p>
+                </footer>
+            </div>
+
+
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+        </div>
+    </div>
+</div>

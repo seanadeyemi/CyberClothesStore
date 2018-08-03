@@ -1,0 +1,33 @@
+﻿
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/AccountLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          
+
+            <div class="login login-2">
+                <header class="login--header login-2--header text-center">
+                    <span class="icon icon-medium fa fa-user"></span>
+                    <h3>We apologize...</h3>
+                    <p>Something went wrong with external authentication</p>
+                    <span class="arrow-down login--header__arrow"></span>
+                </header>
+               
+                <footer class="login--footer text-center">
+                    <p class="login--footer__text">Please click here to log in<strong>@Html.ActionLink("log in here", "Login")</strong></p>
+                </footer>
+            </div>
+
+
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+        </div>
+    </div>
+</div>

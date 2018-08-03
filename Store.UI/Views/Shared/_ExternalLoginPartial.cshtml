@@ -1,0 +1,53 @@
+﻿@using Microsoft.Owin.Security
+
+<div class="login--footer__social-buttons">
+
+    @using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+        if (loginProviders.Count() == 0)
+        {
+            <div><p>Sorry, There are no External Login Providers available</p></div>
+        }
+        else
+        {
+            foreach (AuthenticationDescription p in loginProviders)
+            {
+                var prov = "";
+                var btc = string.Empty;
+
+                switch (p.Caption)
+                {
+                    case "Facebook":
+                        prov = "fa fa-facebook";
+                        btc = "icon-fb";
+                        break;
+
+                    case "Google":
+                        prov = "fa fa-google-plus";
+                        btc = "icon-gp";
+                        break;
+                    default:
+                        break;
+
+                }
+
+
+            <button class="@btc" type="submit" name="provider" value="@p.AuthenticationType" ><i class="@prov"></i>@p.AuthenticationType</button>
+            }
+
+
+        }
+
+
+
+
+        @*<a href="#"><span class="icon icon-small icon-tw fa fa-twitter"></span></a>*@
+
+
+
+    }
+</div>
